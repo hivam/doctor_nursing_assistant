@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="doctor_nursing_assistan_form_view" model="ir.ui.view">
+      <field name="name">doctor.nursing.assistan.form.view</field>
+      <field name="model">doctor.nursing.assistan</field>
+      <field name="arch" type="xml">
+        <form string="HC Auxiliar Enfermeria" version="7.0">
+          <group colspan='4' col='2'>
+            <fieldset class="fieldset_margen">
+            <legend class="texto_legend">Paciente</legend>
+            <group col='2'>
+              <field name='patient_photo' nolabel='1' widget="image" img_height="50" width="50" height="50"/>
+              <group col='1'>
+                <div>
+                  <h3>
+                    <field name='patient_id' nolabel='1' on_change="onchange_patient(patient_id)"/>
+                  </h3>
+                </div>
+                <group col='2'>
+                  <div>
+                    <field name='age_attention' nolabel='1' style="width:10%%"/>
+                    <field name='age_unit' nolabel='1' style="width:10%%"/> - de edad
+                  </div>
+                </group>
+              </group>
+              </group>
+              </fieldset>
+              <fieldset class="fieldset_margen">
+              <legend class="texto_legend">Medico</legend>
+              <group col='2'>
+              <field name='professional_photo' nolabel='1' widget="image" img_height="50" width="50" height="50"/>
+                <group col='1'>
+                <div>
+                  <field name='professional_id' nolabel='1' on_change="onchange_professional(professional_id)"/>
+                </div>
+                <group col='1'>
+                  <div>
+                    <field name='speciality' domain="[('name', '=', speciality)]" style="width:70%%"/>
+                  </div>
+                </group>
+                </group>
+                </group>
+                </fieldset>
+                </group>
+          <group colspan="4" col="2">
+            <field name="diagnostico_medico"/>
+            <field name="conducta_medico"/>
+          </group>
+          <group>
+            <field name="signos_vitales_ids" nolabel="1">
+              <tree string="Tabla Signos Vitales" editable="top">
+                <field name="fecha_y_hora" />
+                <field name="heart_rate"/>
+                <field name="respiratory_rate" />
+                <field name="systolic"/>
+                <field name="diastolic" />
+                <field name="temperature"/>
+                <field name="pulsioximetry" />
+              </tree>
+              <form string="Signos Vitales" >
+                <notebook colspan="4" col='4'> 
+                  <page string="Signos Vitales">
+                      <field name='fecha_y_hora'/>
+                      <group colspan='4' col='3'>
+                          <fieldset class="fieldset_margen">
+                          <legend class="texto_legend">Constantes Vitales</legend>
+                              <group >
+                                  <label for="heart_rate" string="Frecuencia cardiaca"/>
+                                  <field name='heart_rate' nolabel='1' style="width:5%%"/>
+                                  <label for="respiratory_rate" string="Respiratorio"/>
+                                  <field name='respiratory_rate' nolabel='1' style="width:5%%"/>
+                              </group>
+                          </fieldset>
+                          <fieldset class="fieldset_margen">
+                          <legend class="texto_legend">Presion Sanguinea</legend>
+                              <group>
+                                  <label for="systolic" string="Sistolica"/>
+                                  <field name='systolic' nolabel='1' style="width:5%%"/>
+                                  <label for="diastolic" string="Distolica"/>
+                                  <field name='diastolic' nolabel='1' style="width:5%%"/>
+                              </group>
+                          </fieldset>
+                          <fieldset class="fieldset_margen">
+                          <legend class="texto_legend">Temperatura</legend>
+                              <group >
+                                  <label for="temperature" string="Temperatura"/>
+                                  <field name='temperature' nolabel='1' style="width:5%%"/>
+                              </group>
+                          </fieldset>
+                          <fieldset class="fieldset_margen">
+                          <legend class="texto_legend">SpO2</legend>
+                              <group >
+                                  <label for="pulsioximetry" string="Pulsiosimetria"/>
+                                  <field name='pulsioximetry' nolabel='1' style="width:5%%"/>
+                              </group>
+                          </fieldset>
+                      </group>
+                  </page>
+                </notebook>
+              </form>
+            </field>
+          </group>
+          <group>
+            <field name="notas_auxiliar_ids" nolabel="1" editable="top">
+              <tree string="Notas" editable="top">
+                  <field name="name"/>
+                  <field name="fecha_y_hora_nota"/>
+              </tree>
+              <form string="Notas" >
+                <group>
+                  <field name="name"/>
+                  <field name="fecha_y_hora_nota"/>
+                </group>
+              </form>
+            </field>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="doctor_nursing_assistan_tree_view" model="ir.ui.view">
+      <field name="name">doctor.nursing.assistan.tree.view</field>
+      <field name="model">doctor.nursing.assistan</field>
+      <field name="arch" type="xml">
+        <tree string="HC Auxiliar Enfermeria">
+          <field name="diagnostico_medico" />
+          <field name="conducta_medico"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="action_doctor_nursing_assistan" model="ir.actions.act_window">
+      <field name="name">HC Auxiliar Enfermeria</field>
+      <field name="res_model">doctor.nursing.assistan</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="action_doctor_nursing_assistan" id="item_doctor_nursing_assistan" name="HC Auxiliar Enfermeria" parent="doctor.menu_doctor_config" sequence="41"/>
+
+  </data>
+</openerp>

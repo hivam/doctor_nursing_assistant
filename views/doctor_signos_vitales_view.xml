@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="doctor_signos_vitales_form_view" model="ir.ui.view">
+      <field name="name">doctor.signos.vitales.form.view</field>
+      <field name="model">doctor.signos.vitales</field>
+      <field name="arch" type="xml">
+        <form string="Signos Vitales" version="7.0">
+          <field name='fecha_y_hora'/>
+                <notebook colspan="4" col='4'> 
+                  <page string="Vital signs">
+                      <group colspan='4' col='3'>
+                          <fieldset class="fieldset_margen">
+                          <legend class="texto_legend">Constantes Vitales</legend>
+                              <group >
+                                  <label for="heart_rate" string="Frecuencia cardiaca"/>
+                                  <field name='heart_rate' nolabel='1' style="width:5%%"/>
+                                  <label for="respiratory_rate" string="Respiratorio"/>
+                                  <field name='respiratory_rate' nolabel='1' style="width:5%%"/>
+                              </group>
+                          </fieldset>
+                          <fieldset class="fieldset_margen">
+                          <legend class="texto_legend">Presion Sanguinea</legend>
+                              <group>
+                                  <label for="systolic" string="Sistolica"/>
+                                  <field name='systolic' nolabel='1' style="width:5%%"/>
+                                  <label for="diastolic" string="Distolica"/>
+                                  <field name='diastolic' nolabel='1' style="width:5%%"/>
+                              </group>
+                          </fieldset>
+                          <fieldset class="fieldset_margen">
+                          <legend class="texto_legend">Temperatura</legend>
+                              <group >
+                                  <label for="temperature" string="Temperatura"/>
+                                  <field name='temperature' nolabel='1' style="width:5%%"/>
+                              </group>
+                          </fieldset>
+                          <fieldset class="fieldset_margen">
+                          <legend class="texto_legend">SpO2</legend>
+                              <group >
+                                  <label for="pulsioximetry" string="Pulsiosimetria"/>
+                                  <field name='pulsioximetry' nolabel='1' style="width:5%%"/>
+                              </group>
+                          </fieldset>
+                      </group>
+                  </page>
+                </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="doctor_signos_vitales_tree_view" model="ir.ui.view">
+      <field name="name">doctor.signos.vitales.tree.view</field>
+      <field name="model">doctor.signos.vitales</field>
+      <field name="arch" type="xml">
+        <tree string="Tabla Signos Vitales">
+          <field name="fecha_y_hora" />
+          <field name="heart_rate"/>
+          <field name="respiratory_rate" />
+          <field name="systolic"/>
+          <field name="diastolic" />
+          <field name="temperature"/>
+          <field name="pulsioximetry" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="action_doctor_signos_vitales" model="ir.actions.act_window">
+      <field name="name">Signos Vitales</field>
+      <field name="res_model">doctor.signos.vitales</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+</openerp>

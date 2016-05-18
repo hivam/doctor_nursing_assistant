@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="doctor_notas_auxiliar_form_view" model="ir.ui.view">
+      <field name="name">doctor.notas.auxiliar.form.view</field>
+      <field name="model">doctor.notas.auxiliar</field>
+      <field name="arch" type="xml">
+        <form string="Notas Auxiliar Enfermeria" version="7.0">
+          <group>
+            <field name="name"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="doctor_notas_auxiliar_tree_view" model="ir.ui.view">
+      <field name="name">doctor.notas.auxiliar.tree.view</field>
+      <field name="model">doctor.notas.auxiliar</field>
+      <field name="arch" type="xml">
+        <tree string="Doctor Room">
+          <field name="name" />
+          <field name="fecha_y_hora_nota"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="action_doctor_notas_auxiliar" model="ir.actions.act_window">
+      <field name="name">Notas Auxiliar</field>
+      <field name="res_model">doctor.notas.auxiliar</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+</openerp>

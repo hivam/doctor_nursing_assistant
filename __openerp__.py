@@ -31,7 +31,12 @@
     'depends'     : ['doctor', 'l10n_co_doctor'],
     'data'        : [
                     'security/ir.model.access.csv',
-    ],
+                    'views/doctor_nursing_assistant_view.xml',
+                    'views/doctor_notas_auxiliar_view.xml',
+                    'views/doctor_signos_vitales_view.xml',
+                    'views/doctor_attentions_inherit_view.xml',  
+                    'views/doctor_patient_inherit_view.xml', 
+    ],      
     'installable' : True,
 }
 

@@ -1,0 +1,5 @@
+import doctor_nursing_assistant
+import doctor_notas_auxiliar
+import doctor_signos_vitales
+import doctor_attentions_co_inherit
+import doctor_patient_inherit
