@@ -34,53 +34,8 @@ class doctor_patient(osv.osv):
 
 
 	_columns = {
-		
+		'attentions_aux_ids': fields.one2many('doctor.nursing.assistan', 'patient_id', 'Atenciones Aux de enfermeria'),
 	}
-
-
-
-
-
-	def calcular_edad(self,fecha_nacimiento):
-		current_date = datetime.today()
-		st_birth_date = datetime.strptime(fecha_nacimiento, '%Y-%m-%d')
-		re = current_date - st_birth_date
-		dif_days = re.days
-		age = dif_days
-		age_unit = ''
-		if age < 30:
-			age_attention = age,
-			age_unit = '3'
-
-		elif age > 30 and age < 365:
-			age = age / 30
-			age = int(age)
-			age_attention = age,
-			age_unit = '2'
-
-		elif age >= 365:
-			age = int((current_date.year-st_birth_date.year-1) + (1 if (current_date.month, current_date.day) >= (st_birth_date.month, st_birth_date.day) else 0))
-			age_attention = age,
-			age_unit = '1'
-		
-		return age
-
-	def calcular_age_unit(self,fecha_nacimiento):
-		current_date = datetime.today()
-		st_birth_date = datetime.strptime(fecha_nacimiento, '%Y-%m-%d')
-		re = current_date - st_birth_date
-		dif_days = re.days
-		age = dif_days
-		age_unit = ''
-		if age < 30:
-			age_unit = '3'
-		elif age > 30 and age < 365:
-			age_unit = '2'
-
-		elif age >= 365:
-			age_unit = '1'
-
-		return age_unit
 
 	def atender_paciente_enfermera(self, cr, uid, ids, context=None):
 		professional_id= self.pool.get('doctor.professional').browse(cr, uid, self.pool.get('doctor.professional').search(cr, uid, [( 'user_id',  '=', uid)]))[0].id

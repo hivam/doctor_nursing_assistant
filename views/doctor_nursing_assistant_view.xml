@@ -44,7 +44,15 @@
                 </group>
                 </fieldset>
                 </group>
-          <group colspan="4" col="2">
+
+
+
+          <group colspan="6" col="4">
+              <field name="date_attention"/>
+              <field name="origin"/>
+          </group>
+
+          <group colspan="4" col="2">  
             <field name="diagnostico_medico"/>
             <field name="conducta_medico"/>
           </group>
@@ -126,6 +134,7 @@
       <field name="arch" type="xml">
         <tree string="HC Auxiliar Enfermeria" create="false">
           <field name="patient_id"/>
+          <field name="date_attention"/>
           <field name="age_attention" string="Edad"/>
           <field name="age_unit" string="Medidad"/>
           <field name="professional_id"/>

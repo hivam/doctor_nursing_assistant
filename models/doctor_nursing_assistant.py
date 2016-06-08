@@ -30,20 +30,23 @@ class auxiliar_enfermeria(osv.osv):
 
 
 	_name = 'doctor.nursing.assistan'
-
+	_order = "date_attention desc"
 
 	_columns = {
-		'patient_id': fields.many2one('doctor.patient', 'Patient', ondelete='restrict', readonly=True),
+		'patient_id': fields.many2one('doctor.patient', 'Paciente', ondelete='restrict', readonly=True),
 		'patient_photo': fields.related('patient_id', 'photo', type="binary", relation="doctor.patient", readonly=True),
+		'date_attention': fields.datetime('Fecha de atencion', required=True, readonly=True),
+		'origin': fields.char('Documento origen', size=64,
+                              help="Reference of the document that produced this attentiont.", readonly=True),
 		'professional_id': fields.many2one('doctor.professional', 'Doctor', required=True, readonly=True),
 		'speciality': fields.related('professional_id', 'speciality_id', type="many2one", relation="doctor.speciality",
-									 string='Speciality', required=True, store=True),
+									 string='Especialidad', required=True, store=True),
 		'professional_photo': fields.related('professional_id', 'photo', type="binary", relation="doctor.professional",
 											 readonly=True, store=False),
-		'age_attention': fields.integer('Current age', readonly=True),
-		'age_unit': fields.selection([('1', u'Años'), ('2', 'Meses'), ('3', 'Dias'), ], 'Unit of measure of age',
+		'age_attention': fields.integer('Edad actual', readonly=True),
+		'age_unit': fields.selection([('1', u'Años'), ('2', 'Meses'), ('3', 'Dias'), ], 'Unidad de medida de la edad',
 									 readonly=True),
-		'diagnostico_medico':fields.char('Diagnostico medico'),
+		'diagnostico_medico':fields.text('Diagnostico medico'),
 		'conducta_medico':fields.char('Conducta'),
 		'notas_auxiliar_ids': fields.one2many('doctor.notas.auxiliar', 'attentiont_id', 'Notas', ondelete='restrict'),
 		'signos_vitales_ids': fields.one2many('doctor.signos.vitales', 'attentiont_id', 'Tabla signos vitales', ondelete='restrict'),
@@ -122,5 +125,11 @@ class auxiliar_enfermeria(osv.osv):
 			age_unit = '1'
 
 		return age_unit
+
+
+
+	_defaults = {
+		'date_attention': lambda *a: datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S"),
+	}
 
 auxiliar_enfermeria()

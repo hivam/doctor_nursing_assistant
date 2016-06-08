@@ -13,6 +13,18 @@
           <button class="oe_highlight" help="Atender Paciente." string="Atender" name="atender_paciente_enfermera" type="object" groups="doctor.group_aux_enfermeria" icon="terp-personal"/>
         </xpath>
 
+        <xpath expr="/form[@string='Patient']/sheet/notebook[@colspan='4']" position="inside">
+          <page string="Atenciones aux de enfermeria">
+            <field name="attentions_aux_ids" nolabel="1" readonly="1">
+              <tree string="Atenciones">
+                <field name="professional_id"/>
+                <field name="speciality"/>
+                <field name="date_attention"/>
+              </tree>
+            </field>
+          </page>
+        </xpath>
+
       </field>
     </record>
   </data>
