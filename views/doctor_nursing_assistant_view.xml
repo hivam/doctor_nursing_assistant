@@ -124,21 +124,24 @@
       <field name="name">doctor.nursing.assistan.tree.view</field>
       <field name="model">doctor.nursing.assistan</field>
       <field name="arch" type="xml">
-        <tree string="HC Auxiliar Enfermeria">
-          <field name="diagnostico_medico" />
-          <field name="conducta_medico"/>
+        <tree string="HC Auxiliar Enfermeria" create="false">
+          <field name="patient_id"/>
+          <field name="age_attention" string="Edad"/>
+          <field name="age_unit" string="Medidad"/>
+          <field name="professional_id"/>
+          <field name="speciality"/>
         </tree>
       </field>
     </record>
 
     <record id="action_doctor_nursing_assistan" model="ir.actions.act_window">
-      <field name="name">HC Auxiliar Enfermeria</field>
+      <field name="name">Atencion aux. enfermeria</field>
       <field name="res_model">doctor.nursing.assistan</field>
       <field name="view_type">form</field>
       <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem action="action_doctor_nursing_assistan" id="item_doctor_nursing_assistan" name="HC Auxiliar Enfermeria" parent="doctor.menu_doctor_config" sequence="41"/>
+    <menuitem action="action_doctor_nursing_assistan" id="item_doctor_nursing_assistan" name="Atencion aux. enfermeria" parent="doctor.menu_doctor_process" sequence="41"/>
 
   </data>
 </openerp>

@@ -58,6 +58,8 @@ class auxiliar_enfermeria(osv.osv):
 
 		values.update({
 			'patient_photo': photo_patient,
+			'age_attention': 20
+
 		})
 		return {'value': values}
 
@@ -78,5 +80,47 @@ class auxiliar_enfermeria(osv.osv):
 		})
 		return {'value': values}
 
+
+
+	def calcular_edad(self,fecha_nacimiento):
+		current_date = datetime.today()
+		st_birth_date = datetime.strptime(fecha_nacimiento, '%Y-%m-%d')
+		re = current_date - st_birth_date
+		dif_days = re.days
+		age = dif_days
+		age_unit = ''
+		if age < 30:
+			age_attention = age,
+			age_unit = '3'
+
+		elif age > 30 and age < 365:
+			age = age / 30
+			age = int(age)
+			age_attention = age,
+			age_unit = '2'
+
+		elif age >= 365:
+			age = int((current_date.year-st_birth_date.year-1) + (1 if (current_date.month, current_date.day) >= (st_birth_date.month, st_birth_date.day) else 0))
+			age_attention = age,
+			age_unit = '1'
+		
+		return age
+
+	def calcular_age_unit(self,fecha_nacimiento):
+		current_date = datetime.today()
+		st_birth_date = datetime.strptime(fecha_nacimiento, '%Y-%m-%d')
+		re = current_date - st_birth_date
+		dif_days = re.days
+		age = dif_days
+		age_unit = ''
+		if age < 30:
+			age_unit = '3'
+		elif age > 30 and age < 365:
+			age_unit = '2'
+
+		elif age >= 365:
+			age_unit = '1'
+
+		return age_unit
 
 auxiliar_enfermeria()
