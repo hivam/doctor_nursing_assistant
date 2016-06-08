@@ -45,38 +45,39 @@ class doctor_co_attentios(osv.osv):
 		nombre_diagnostico = ''
 		ejcutar_create = None
 		if 'aux_enfermeria_id' in vals:
-			id_especialidad = self.pool.get('doctor.professional').browse(cr, uid, vals['aux_enfermeria_id'], context=context).speciality_id.id
-			if not 'patient_id' in vals:
-				id_paciente = context['default_patient_id']
-			else:
-				id_paciente = vals['patient_id']
+			if vals['aux_enfermeria_id']:
+				id_especialidad = self.pool.get('doctor.professional').browse(cr, uid, vals['aux_enfermeria_id'], context=context).speciality_id.id
+				if not 'patient_id' in vals:
+					id_paciente = context['default_patient_id']
+				else:
+					id_paciente = vals['patient_id']
 
-			fecha_nacimiento =  self.pool.get('doctor.patient').browse(cr, uid, id_paciente, context=context).birth_date
-			res={}
-			res['patient_id'] =  id_paciente
-			res['professional_id'] = vals['aux_enfermeria_id']
-			res['conducta_medico'] = vals['conduct']
-			res['speciality'] = id_especialidad
-			res['age_attention'] = self.calcular_edad(fecha_nacimiento)
-			res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
-			
-			ejcutar_create = super(doctor_co_attentios,self).create(cr, uid, vals, context)
-
-			if 'diseases_ids' in vals:
-				for i in range(0,len(vals['diseases_ids']),1):
-					lista_diagnostico.append(vals['diseases_ids'][i][2]['diseases_id'])
-					
-				if len(lista_diagnostico) > 0:
-					for i in lista_diagnostico:
-
-						nombre_diagnostico += '\n' + self.pool.get('doctor.diseases').browse(cr, uid, i, context=context).name
-
-				res['diagnostico_medico'] = nombre_diagnostico
+				fecha_nacimiento =  self.pool.get('doctor.patient').browse(cr, uid, id_paciente, context=context).birth_date
+				res={}
+				res['patient_id'] =  id_paciente
+				res['professional_id'] = vals['aux_enfermeria_id']
+				res['conducta_medico'] = vals['conduct']
+				res['speciality'] = id_especialidad
+				res['age_attention'] = self.calcular_edad(fecha_nacimiento)
+				res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
 				
-			res['origin'] = vals['number']
-			self.pool.get('doctor.nursing.assistan').create(cr, uid, res, context)
-		else:
-			return super(doctor_co_attentios,self).create(cr, uid, vals, context)
+				ejcutar_create = super(doctor_co_attentios,self).create(cr, uid, vals, context)
+
+				if 'diseases_ids' in vals:
+					for i in range(0,len(vals['diseases_ids']),1):
+						lista_diagnostico.append(vals['diseases_ids'][i][2]['diseases_id'])
+						
+					if len(lista_diagnostico) > 0:
+						for i in lista_diagnostico:
+
+							nombre_diagnostico += '\n' + self.pool.get('doctor.diseases').browse(cr, uid, i, context=context).name
+
+					res['diagnostico_medico'] = nombre_diagnostico
+					
+				res['origin'] = vals['number']
+				self.pool.get('doctor.nursing.assistan').create(cr, uid, res, context)
+			else:
+				return super(doctor_co_attentios,self).create(cr, uid, vals, context)
 		
 		return ejcutar_create
 
