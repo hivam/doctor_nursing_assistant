@@ -81,4 +81,25 @@ class doctor_co_attentios(osv.osv):
 		
 		return ejcutar_create
 
+
+
+	def onchange_domain_auxiliar(self,cr,uid,ids,context=None):
+		res={'value':{}}
+		lista_usuarios = []
+		aux_enfermeria_grupo_id = self.pool.get('res.groups').search(cr, uid, [('name', '=', 'Aux. enfermeria')], context=context)
+		
+		cr.execute("SELECT uid FROM res_groups_users_rel WHERE gid = %s" %(aux_enfermeria_grupo_id[0]))
+		
+		for i in cr.fetchall():
+			lista_usuarios.append(i[0])
+
+
+		_logger.info(lista_usuarios)
+		dominio=''
+		dominio=[('user_id','in',lista_usuarios)]
+		#repr
+		res.setdefault('domain', {})
+		res['domain']['aux_enfermeria_id']=repr(dominio)
+		return res
+
 doctor_co_attentios()
