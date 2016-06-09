@@ -7,6 +7,10 @@
       <field name="model">doctor.nursing.assistan</field>
       <field name="arch" type="xml">
         <form string="HC Auxiliar Enfermeria" version="7.0">
+          <header>
+            <button string="Finalizar Atencion" name="button_closed" states="abierta" type="object" class="oe_highlight" groups="doctor.group_aux_enfermeria"/>
+            <field name="state" widget="statusbar" statusbar_visible="abierta,cerrada"/>
+          </header>
           <group colspan='4' col='2'>
             <fieldset class="fieldset_margen">
             <legend class="texto_legend">Paciente</legend>

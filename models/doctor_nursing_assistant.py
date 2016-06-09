@@ -32,12 +32,16 @@ class auxiliar_enfermeria(osv.osv):
 	_name = 'doctor.nursing.assistan'
 	_order = "date_attention desc"
 
+
+	def button_closed(self, cr, uid, ids, context=None):
+		return self.write(cr, uid, ids, {'state': 'cerrada'}, context=context)
+	
 	_columns = {
 		'patient_id': fields.many2one('doctor.patient', 'Paciente', ondelete='restrict', readonly=True),
 		'patient_photo': fields.related('patient_id', 'photo', type="binary", relation="doctor.patient", readonly=True),
 		'date_attention': fields.datetime('Fecha de atencion', required=True, readonly=True),
 		'origin': fields.char('Documento origen', size=64,
-                              help="Reference of the document that produced this attentiont.", readonly=True),
+							  help="Reference of the document that produced this attentiont.", readonly=True),
 		'professional_id': fields.many2one('doctor.professional', 'Doctor', required=True, readonly=True),
 		'speciality': fields.related('professional_id', 'speciality_id', type="many2one", relation="doctor.speciality",
 									 string='Especialidad', required=True, store=True),
@@ -46,10 +50,11 @@ class auxiliar_enfermeria(osv.osv):
 		'age_attention': fields.integer('Edad actual', readonly=True),
 		'age_unit': fields.selection([('1', u'Años'), ('2', 'Meses'), ('3', 'Dias'), ], 'Unidad de medida de la edad',
 									 readonly=True),
-		'diagnostico_medico':fields.text('Diagnostico medico'),
-		'conducta_medico':fields.char('Conducta'),
-		'notas_auxiliar_ids': fields.one2many('doctor.notas.auxiliar', 'attentiont_id', 'Notas', ondelete='restrict'),
-		'signos_vitales_ids': fields.one2many('doctor.signos.vitales', 'attentiont_id', 'Tabla signos vitales', ondelete='restrict'),
+		'diagnostico_medico':fields.text('Diagnostico medico', states={'cerrada': [('readonly', True)]}),
+		'conducta_medico':fields.char('Conducta', states={'cerrada': [('readonly', True)]}),
+		'notas_auxiliar_ids': fields.one2many('doctor.notas.auxiliar', 'attentiont_id', 'Notas', ondelete='restrict', states={'cerrada': [('readonly', True)]}),
+		'signos_vitales_ids': fields.one2many('doctor.signos.vitales', 'attentiont_id', 'Tabla signos vitales', ondelete='restrict', states={'cerrada': [('readonly', True)]}),
+		'state': fields.selection([('abierta', 'Abierta'), ('cerrada', 'Cerrada')], 'Estado', readonly=True, required=True),
 	}
 
 	def onchange_patient(self, cr, uid, ids, patient_id, context=None):
@@ -130,6 +135,7 @@ class auxiliar_enfermeria(osv.osv):
 
 	_defaults = {
 		'date_attention': lambda *a: datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S"),
+		'state': 'abierta',
 	}
 
 auxiliar_enfermeria()
