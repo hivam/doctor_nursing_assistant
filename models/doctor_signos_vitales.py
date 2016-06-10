@@ -36,12 +36,12 @@ class doctor_signos_vitales(osv.osv):
 		'attentiont_id': fields.many2one('doctor.nursing.assistan', 'Attention', ondelete='restrict'),
 		'patient_id': fields.many2one('doctor.patient', 'Patient', ondelete='restrict'),
 		'fecha_y_hora': fields.datetime('Fecha y hora'),
-		'heart_rate': fields.integer('Frecuencia Cardiaca', help="Frecuencia cardiaca expresada en latidos por minuto"),
+		'heart_rate': fields.integer(u'Frecuencia Cardíaca', help="Frecuencia cardiaca expresada en latidos por minuto"),
 		'respiratory_rate': fields.integer('Respiratorio', help="Frecuencia respiratoria expresada en respiraciones por minuto"),
-		'systolic': fields.integer('Sistolica'),
-		'diastolic': fields.integer('Distolica'),
+		'systolic': fields.integer('Sistólica'),
+		'diastolic': fields.integer('Diastólica'),
 		'temperature': fields.float('Temperatura'),
-		'pulsioximetry': fields.integer('Pulsioximetria', help="Saturación de oxígeno ( arterial) ."),
+		'pulsioximetry': fields.integer('Pulsioximetría', help="Saturación de oxígeno ( arterial) ."),
 	}
 
 

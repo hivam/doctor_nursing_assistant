@@ -34,7 +34,7 @@ class doctor_co_attentios(osv.osv):
 
 	_columns = {
 		'remite_aux_enfermeria': fields.boolean('Tratamiento con auxiliar de enfermeria'),
-		'aux_enfermeria_id': fields.many2one('doctor.professional', 'Aux. Enfermeria', domain="[('speciality_id.name','=','Auxiliar de enfermeria')]"),
+		'aux_enfermeria_id': fields.many2one('doctor.professional', 'Aux. Enfermeria',),
 	}
 
 
