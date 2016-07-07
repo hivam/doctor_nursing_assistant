@@ -55,6 +55,7 @@ class auxiliar_enfermeria(osv.osv):
 		'notas_auxiliar_ids': fields.one2many('doctor.notas.auxiliar', 'attentiont_id', 'Notas', ondelete='restrict', states={'cerrada': [('readonly', True)]}),
 		'signos_vitales_ids': fields.one2many('doctor.signos.vitales', 'attentiont_id', 'Tabla signos vitales', ondelete='restrict', states={'cerrada': [('readonly', True)]}),
 		'state': fields.selection([('abierta', 'Abierta'), ('cerrada', 'Cerrada')], 'Estado', readonly=True, required=True),
+		'plantilla_aux_enfermeria_id': fields.many2one('doctor.attentions.recomendaciones', 'Plantillas'),
 	}
 
 	def onchange_patient(self, cr, uid, ids, patient_id, context=None):
@@ -131,6 +132,21 @@ class auxiliar_enfermeria(osv.osv):
 
 		return age_unit
 
+
+	def onchange_plantillas(self, cr, uid, ids, plantilla_id, campo, context=None):
+		res={'value':{}}
+		registros = []
+		if plantilla_id:
+			cuerpo = self.pool.get('doctor.attentions.recomendaciones').browse(cr,uid,plantilla_id,context=context).cuerpo
+			fecha = datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S")
+			registros.append((0,0,{'name' : cuerpo, 'fecha_y_hora_nota': fecha}))
+
+			res['value'][campo]=registros
+		else:
+			res['value'][campo]=''
+
+		_logger.info(res)
+		return res		
 
 
 	_defaults = {
