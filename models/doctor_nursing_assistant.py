@@ -42,7 +42,7 @@ class auxiliar_enfermeria(osv.osv):
 		'date_attention': fields.datetime('Fecha de atencion', required=True, readonly=True),
 		'origin': fields.char('Documento origen', size=64,
 							  help="Reference of the document that produced this attentiont.", readonly=True),
-		'professional_id': fields.many2one('doctor.professional', 'Doctor', required=True, readonly=True),
+		'professional_id': fields.many2one('doctor.professional', 'Profesional de la salud', required=True, readonly=True),
 		'speciality': fields.related('professional_id', 'speciality_id', type="many2one", relation="doctor.speciality",
 									 string='Especialidad', required=True, store=True),
 		'professional_photo': fields.related('professional_id', 'photo', type="binary", relation="doctor.professional",
