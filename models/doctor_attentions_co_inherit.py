@@ -34,7 +34,6 @@ class doctor_co_attentios(osv.osv):
 
 	_columns = {
 		'remite_aux_enfermeria': fields.boolean('Tratamiento con auxiliar de enfermeria'),
-		'aux_enfermeria_id': fields.many2one('doctor.professional', 'Aux. Enfermeria',),
 	}
 
 
@@ -44,9 +43,9 @@ class doctor_co_attentios(osv.osv):
 		id_paciente = None
 		nombre_diagnostico = ''
 		ejcutar_create = None
-		if 'aux_enfermeria_id' in vals:
-			if vals['aux_enfermeria_id']:
-				id_especialidad = self.pool.get('doctor.professional').browse(cr, uid, vals['aux_enfermeria_id'], context=context).speciality_id.id
+		if 'remite_aux_enfermeria' in vals:
+			if vals['remite_aux_enfermeria']:
+				#id_especialidad = self.pool.get('doctor.professional').browse(cr, uid, vals['aux_enfermeria_id'], context=context).speciality_id.id
 				if not 'patient_id' in vals:
 					id_paciente = context['default_patient_id']
 				else:
@@ -55,12 +54,12 @@ class doctor_co_attentios(osv.osv):
 				fecha_nacimiento =  self.pool.get('doctor.patient').browse(cr, uid, id_paciente, context=context).birth_date
 				res={}
 				res['patient_id'] =  id_paciente
-				res['professional_id'] = vals['aux_enfermeria_id']
+				#res['professional_id'] = vals['aux_enfermeria_id']
 				res['conducta_medico'] = vals['conduct']
-				res['speciality'] = id_especialidad
+				#res['speciality'] = id_especialidad
 				res['age_attention'] = self.calcular_edad(fecha_nacimiento)
 				res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
-				
+
 				ejcutar_create = super(doctor_co_attentios,self).create(cr, uid, vals, context)
 
 				if 'diseases_ids' in vals:
