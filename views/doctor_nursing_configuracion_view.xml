@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>							 <!-- doctor speciality Form View -->
+		<record model="ir.ui.view" id="view_doctor_configuracion_nursing">
+				<field name="name">Predeterminar atencion de enfermeria	</field>
+				<field name="model">doctor.nursing.configuracion</field>
+				<field name="arch" type="xml">
+						<form string="Predeterminar atencion auxiliar de enfermeria" version="7.0">
+								<label for="name" string="Remitir atención con auxiliar de enfermeria ?"/>
+								<field name="name"/>
+						</form>
+				</field>
+		</record>
+
+		<!-- doctor speciality Tree View -->
+		<record model="ir.ui.view" id="view_doctor_configuracion_nursing_tree">
+				<field name="name">Predeterminar atencion de enfermeria</field>
+				<field name="model">doctor.nursing.configuracion</field>
+				<field name="arch" type="xml">
+						<tree string="Predeterminar atencion auxiliar de enfermeria" version="7.0">
+								<field name="name"/>
+						</tree>
+				</field>
+		</record>
+
+		<!-- doctor speciality Action -->
+		<record model="ir.actions.act_window" id="action_doctor_configuracion_nursing">
+				<field name="name">Predeterminar atencion de enfermeria</field>
+				<field name="res_model">doctor.nursing.configuracion</field>
+				<field name="view_type">form</field>
+				<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem id="menu_doctor_configuracion_nursing" name="Configuracion Auxiliar de enfermeria" parent="doctor.menu_doctor_config" action="action_doctor_configuracion_nursing"/>
+
+
+	</data>
+</openerp>

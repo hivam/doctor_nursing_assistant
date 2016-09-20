@@ -6,8 +6,10 @@ access_doctor_notas_auxiliar_aux,doctor.notas.auxiliar_aux,model_doctor_notas_au
 access_doctor_signos_vitales_aux,doctor.signos.vitales_aux,model_doctor_signos_vitales,doctor.group_aux_enfermeria,1,1,1,0
 
 
+
 access_doctor_nursing_assistan_physician,doctor.nursing.assistan_aux,model_doctor_nursing_assistan,doctor.group_doctor_physician,1,1,1,0
 
+access_doctor_nursing_configuracion_aux,doctor.nursing.configuracion,model_doctor_nursing_configuracion,doctor.group_doctor_physician,1,1,0,0
 
 
 

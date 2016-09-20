@@ -24,7 +24,8 @@ from openerp.osv import fields, osv
 from openerp.tools.translate import _
 import time
 from datetime import date, datetime, timedelta
-
+from lxml import etree
+from openerp.osv.orm import setup_modifiers
 
 class doctor_co_attentios(osv.osv):
 
@@ -32,9 +33,30 @@ class doctor_co_attentios(osv.osv):
 
 	_inherit = 'doctor.attentions'
 
+
+
 	_columns = {
 		'remite_aux_enfermeria': fields.boolean('Tratamiento con auxiliar de enfermeria'),
 	}
+
+
+	def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
+		
+		res = super(doctor_co_attentios, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar, submenu=submenu)
+		doc = etree.XML(res['arch'])
+		seleccionado = False
+		for node in doc.xpath("//field[@name='remite_aux_enfermeria']"):
+
+			modelo_buscar = self.pool.get('doctor.nursing.configuracion')
+			record = modelo_buscar.search(cr, uid, [('name', '=', True)], context=context)
+			if record:
+				for datos in modelo_buscar.browse(cr, uid, record, context=context):
+					seleccionado = datos.name
+				node.set('invisible', repr(seleccionado))
+				setup_modifiers(node, res['fields']['remite_aux_enfermeria'])
+		res['arch'] = etree.tostring(doc)
+				
+		return res
 
 
 
@@ -43,6 +65,15 @@ class doctor_co_attentios(osv.osv):
 		id_paciente = None
 		nombre_diagnostico = ''
 		ejcutar_write = None
+		modulo_predeterminado = self.pool.get('doctor.nursing.configuracion')
+
+
+		bandera_id = modulo_predeterminado.search(cr, uid, [('name', '=', True)], context=context)[0]
+
+		if bandera_id:
+
+			for i in modulo_predeterminado.browse(cr, uid, bandera_id, context=context):
+				bandera_id = i.name
 
 		if 'remite_aux_enfermeria' in vals:
 			if vals['remite_aux_enfermeria']:
@@ -58,6 +89,7 @@ class doctor_co_attentios(osv.osv):
 				res['conducta_medico'] = vals['conduct']
 				res['age_attention'] = self.calcular_edad(fecha_nacimiento)
 				res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
+
 
 				ejcutar_write = super(doctor_co_attentios,self).write(cr, uid, ids, vals, context)
 
@@ -77,7 +109,7 @@ class doctor_co_attentios(osv.osv):
 			else:
 				return super(doctor_co_attentios,self).write(cr, uid, ids, vals, context)
 		
-		return ejcutar_create
+		return ejcutar_write
 
 
 	def create(self, cr, uid, vals, context=None):
