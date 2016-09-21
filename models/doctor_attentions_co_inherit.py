@@ -72,7 +72,7 @@ class doctor_co_attentios(osv.osv):
 		fecha_nacimiento =  self.pool.get('doctor.patient').browse(cr, uid, id_paciente, context=context).birth_date
 		res={}
 		res['patient_id'] =  id_paciente
-		res['conducta_medico'] = lista_uno['conduct']
+		res['conducta_medico'] = lista_uno['conduct'] if 'conduct' in lista_uno else None
 		res['age_attention'] = self.calcular_edad(fecha_nacimiento)
 		res['age_unit'] = self.calcular_age_unit(fecha_nacimiento)
 
