@@ -64,10 +64,18 @@ class doctor_co_attentios(osv.osv):
 		lista_diagnostico = []
 		id_paciente = None
 		nombre_diagnostico = ''
+
 		if not 'patient_id' in lista_dos:
-			id_paciente = lista_dos['patient']
+			if 'patient' in lista_dos:
+				id_paciente = lista_dos['patient'] or None
 		else:
-			id_paciente = lista_dos['patient_id']
+			if 'patient_id' in lista_dos:
+				id_paciente = lista_dos['patient_id'] or None
+
+
+		for i in self.browse(cr, uid, ids, context=context):
+			id_paciente = i.patient_id.id
+
 
 		fecha_nacimiento =  self.pool.get('doctor.patient').browse(cr, uid, id_paciente, context=context).birth_date
 		res={}
@@ -78,7 +86,14 @@ class doctor_co_attentios(osv.osv):
 
 		if 'diseases_ids' in lista_uno:
 			for i in range(0,len(lista_uno['diseases_ids']),1):
-				lista_diagnostico.append(lista_uno['diseases_ids'][i][2]['diseases_id'])
+
+				if isinstance(lista_uno['diseases_ids'][i][2], bool) != True:
+					lista_diagnostico.append(lista_uno['diseases_ids'][i][2]['diseases_id'])
+				else:
+					diseases_ids = self.pool.get('doctor.attentions.diseases').search(cr, uid, [('attentiont_id', 'in', ids)], context=context)
+					for i in self.pool.get('doctor.attentions.diseases').browse(cr, uid, diseases_ids, context=context):
+						if i.diseases_id.id not in lista_diagnostico:
+							lista_diagnostico.append(i.diseases_id.id)
 
 			if len(lista_diagnostico) > 0:
 				for i in lista_diagnostico:
@@ -86,8 +101,8 @@ class doctor_co_attentios(osv.osv):
 
 				res['diagnostico_medico'] = nombre_diagnostico
 
-			res['origin'] = self.browse(cr, uid, ids[0], context=context).number
-			self.pool.get('doctor.nursing.assistan').create(cr, uid, res, context)
+		res['origin'] = self.browse(cr, uid, ids[0], context=context).number
+		self.pool.get('doctor.nursing.assistan').create(cr, uid, res, context)
 
 
 	def metodo_create(self, cr, uid, lista_uno, lista_dos, context=None):
@@ -115,8 +130,8 @@ class doctor_co_attentios(osv.osv):
 					nombre_diagnostico += '\n' + self.pool.get('doctor.diseases').browse(cr, uid, i, context=context).name
 
 				res['diagnostico_medico'] = nombre_diagnostico
-			res['origin'] = lista_uno['number']
-			self.pool.get('doctor.nursing.assistan').create(cr, uid, res, context)
+		res['origin'] = lista_uno['number']
+		self.pool.get('doctor.nursing.assistan').create(cr, uid, res, context)
 
 
 	def write(self, cr, uid, ids, vals, context=None):
