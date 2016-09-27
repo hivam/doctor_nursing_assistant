@@ -95,14 +95,27 @@ class doctor_co_attentios(osv.osv):
 						if i.diseases_id.id not in lista_diagnostico:
 							lista_diagnostico.append(i.diseases_id.id)
 
+
+			lista_diagnostico = list(set(lista_diagnostico))				
+
 			if len(lista_diagnostico) > 0:
 				for i in lista_diagnostico:
 					nombre_diagnostico += '\n' + self.pool.get('doctor.diseases').browse(cr, uid, i, context=context).name
 
 				res['diagnostico_medico'] = nombre_diagnostico
+		
 
-		res['origin'] = self.browse(cr, uid, ids[0], context=context).number
-		self.pool.get('doctor.nursing.assistan').create(cr, uid, res, context)
+		number = self.browse(cr, uid, ids[0], context=context).number
+		res['origin'] = number
+
+		ids_attencion_vieja = self.pool.get('doctor.nursing.assistan').search(cr, uid, [('origin', '=', number)], context=context)
+		id_attention = None
+		for i in self.pool.get('doctor.nursing.assistan').browse(cr, uid, ids_attencion_vieja, context=context):
+			id_attention = i.id
+
+
+
+		self.pool.get('doctor.nursing.assistan').write(cr, uid, id_attention, res, context)
 
 
 	def metodo_create(self, cr, uid, lista_uno, lista_dos, context=None):
