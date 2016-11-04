@@ -33,7 +33,7 @@ class auxiliar_enfermeria(osv.osv):
 	_order = "date_attention desc"
 
 
-	def button_closed(self, cr, uid, ids, context=None):
+	def boton_cerrar(self, cr, uid, ids, context=None):
 		return self.write(cr, uid, ids, {'state': 'cerrada'}, context=context)
 
 	def _get_profesional(self, cr, uid, ids, field_name, arg, context=None):
