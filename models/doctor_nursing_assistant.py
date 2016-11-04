@@ -32,10 +32,6 @@ class auxiliar_enfermeria(osv.osv):
 	_name = 'doctor.nursing.assistan'
 	_order = "date_attention desc"
 
-
-	def boton_cerrar(self, cr, uid, ids, context=None):
-		return self.write(cr, uid, ids, {'state': 'cerrada'}, context=context)
-
 	def _get_profesional(self, cr, uid, ids, field_name, arg, context=None):
 		res = {}
 		professional_id = self.pool.get("doctor.professional").search(cr, uid, [('user_id', '=', uid)], context=context)
