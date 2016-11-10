@@ -54,6 +54,7 @@ class doctor_co_attentios(osv.osv):
 					seleccionado = datos.name
 				node.set('invisible', repr(seleccionado))
 				setup_modifiers(node, res['fields']['remite_aux_enfermeria'])
+		
 		res['arch'] = etree.tostring(doc)
 				
 		return res
@@ -165,7 +166,8 @@ class doctor_co_attentios(osv.osv):
 				self.metodo_write(cr, uid, ids, vals, context, context=context)
 			else:
 				return super(doctor_co_attentios,self).write(cr, uid, ids, vals, context)
-		
+		else:
+			return super(doctor_co_attentios,self).write(cr, uid, ids, vals, context)
 		return ejcutar_write
 
 
@@ -186,7 +188,8 @@ class doctor_co_attentios(osv.osv):
 				self.metodo_create(cr, uid, vals, context, context=context)
 			else:
 				return super(doctor_co_attentios,self).create(cr, uid, vals, context)
-		
+		else:
+			return super(doctor_co_attentios,self).create(cr, uid, vals, context)
 		return ejcutar_create
 
 
