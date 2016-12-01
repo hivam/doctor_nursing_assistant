@@ -8,7 +8,7 @@
       <field name="model">doctor.attentions</field>
       <field name="inherit_id" ref="doctor.view_doctor_attentions_form"/>
       <field name="arch" type="xml">
-        <field name="notas_confidenciales" position="after">
+        <field name="plantilla_conducta_id" position="after">
           <field name="remite_aux_enfermeria" on_change="onchange_domain_auxiliar(context)"/>
           <!--<field name="aux_enfermeria_id" attrs="{'invisible':[('remite_aux_enfermeria','=',False)],
             'required':[('remite_aux_enfermeria','=',True)]}"/>-->
