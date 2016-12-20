@@ -19,3 +19,6 @@ access_doctor_nursing_assistan_asistente_administrativo,doctor.nursing.assistan_
 access_doctor_nursing_assinstant,doctor.nursing.assistan_aux,model_doctor_nursing_assistan,doctor.group_doctor_assistant,1,0,0,0
 
 
+access_doctor_nursing_assistan_psicologia,doctor.nursing.assistan_aux,model_doctor_nursing_assistan,doctor.group_doctor_psicologo,1,0,0,0
+
+access_doctor_nursing_configuracion_psicologo,doctor.nursing.configuracion,model_doctor_nursing_configuracion,doctor.group_doctor_psicologo,1,0,0,0
