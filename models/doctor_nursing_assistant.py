@@ -88,6 +88,8 @@ class auxiliar_enfermeria(osv.osv):
 
 		values.update({
 			'patient_photo': photo_patient,
+			'age_attention' : self.calcular_edad(patient_data.birth_date),
+			'age_unit' : self.calcular_age_unit(patient_data.birth_date)
 
 		})
 		return {'value': values}
