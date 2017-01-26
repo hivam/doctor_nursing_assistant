@@ -33,7 +33,7 @@ class doctor_notas_auxiliar(osv.osv):
 
 
 	_columns = {
-		'name': fields.char("Nota"),
+		'name': fields.text("Nota"),
 		'fecha_y_hora_nota': fields.datetime('Fecha y hora'),
 		'attentiont_id': fields.many2one('doctor.nursing.assistan', 'Attention', ondelete='restrict'),
 		'patient_id': fields.many2one('doctor.patient', 'Patient', ondelete='restrict'),

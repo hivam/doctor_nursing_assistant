@@ -115,8 +115,8 @@
             </field>
           </group>
           <group>
-            <field name="notas_auxiliar_ids" nolabel="1" editable="top">
-              <tree string="Notas" editable="top">
+            <field name="notas_auxiliar_ids" nolabel="1">
+              <tree string="Notas" editable="bottom">
                   <field name="name"/>
                   <field name="fecha_y_hora_nota"/>
               </tree>
