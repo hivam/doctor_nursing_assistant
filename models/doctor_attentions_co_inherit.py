@@ -159,7 +159,7 @@ class doctor_co_attentios(osv.osv):
 			if bandera_id:
 				ejcutar_write = super(doctor_co_attentios,self).write(cr, uid, ids, vals, context)
 				self.metodo_write(cr, uid, ids, vals, context, context=context)
-
+				return ejcutar_write
 		if 'remite_aux_enfermeria' in vals:
 			if vals['remite_aux_enfermeria']:
 				ejcutar_write = super(doctor_co_attentios,self).write(cr, uid, ids, vals, context)
@@ -182,6 +182,8 @@ class doctor_co_attentios(osv.osv):
 				ejcutar_create = super(doctor_co_attentios,self).create(cr, uid, vals, context)
 				self.metodo_create(cr, uid, vals, context, context=context)
 
+				return ejcutar_create	
+				
 		if 'remite_aux_enfermeria' in vals:
 			if vals['remite_aux_enfermeria']:
 				ejcutar_create = super(doctor_co_attentios,self).create(cr, uid, vals, context)
@@ -190,6 +192,7 @@ class doctor_co_attentios(osv.osv):
 				return super(doctor_co_attentios,self).create(cr, uid, vals, context)
 		else:
 			return super(doctor_co_attentios,self).create(cr, uid, vals, context)
+		
 		return ejcutar_create
 
 
