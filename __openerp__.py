@@ -28,7 +28,7 @@
     'author'      : 'Proyecto Evoluzion',
     'website'     : 'http://www.proyectoevoluzion.com/',
     'license'     : 'AGPL-3',
-    'depends'     : ['doctor', 'l10n_co_doctor'],
+    'depends'     : ['l10n_co_doctor'],
     'data'        : [
                     'views/doctor_nursing_assistant_view.xml',
                     'views/doctor_notas_auxiliar_view.xml',
