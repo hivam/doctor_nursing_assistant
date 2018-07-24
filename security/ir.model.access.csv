@@ -5,16 +5,11 @@ access_doctor_nursing_assistan_aux,doctor.nursing.assistan_aux,model_doctor_nurs
 access_doctor_notas_auxiliar_aux,doctor.notas.auxiliar_aux,model_doctor_notas_auxiliar,doctor.group_aux_enfermeria,1,1,1,0
 access_doctor_signos_vitales_aux,doctor.signos.vitales_aux,model_doctor_signos_vitales,doctor.group_aux_enfermeria,1,1,1,0
 
-access_doctor_odontologia_aux,doctor.hc.odontologia_aux,model_doctor_hc_odontologia,doctor.group_aux_enfermeria,1,0,0,0
-
 
 
 access_doctor_nursing_assistan_physician,doctor.nursing.assistan_aux,model_doctor_nursing_assistan,doctor.group_doctor_physician,1,1,1,0
 
 access_doctor_nursing_configuracion_aux,doctor.nursing.configuracion,model_doctor_nursing_configuracion,doctor.group_doctor_physician,1,1,1,0
-
-
-access_doctor_nursing_assistan_odon,doctor.nursing.assistan_aux,model_doctor_nursing_assistan,doctor.group_doctor_odontologo,1,0,0,0
 
 
 access_doctor_nursing_assistan_asistente_administrativo,doctor.nursing.assistan_aux,model_doctor_nursing_assistan,doctor.group_doctor_asistente_admin,1,0,0,0
@@ -24,7 +19,4 @@ access_doctor_nursing_assinstant,doctor.nursing.assistan_aux,model_doctor_nursin
 access_doctor_nursing_assistan_psicologia,doctor.nursing.assistan_aux,model_doctor_nursing_assistan,doctor.group_doctor_psicologo,1,0,0,0
 
 access_doctor_nursing_configuracion_psicologo,doctor.nursing.configuracion,model_doctor_nursing_configuracion,doctor.group_doctor_psicologo,1,0,0,0
-
-
-access_doctor_nursing_configuracion_odontologo,doctor.nursing.configuracion,model_doctor_nursing_configuracion,doctor.group_doctor_odontologo,1,0,0,0
 

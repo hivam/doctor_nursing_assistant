@@ -4,4 +4,3 @@ import doctor_signos_vitales
 import doctor_attentions_co_inherit
 import doctor_patient_inherit
 import doctor_nursing_configuracion
-import doctor_attention_odontologia
