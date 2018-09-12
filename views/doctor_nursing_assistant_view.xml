@@ -156,7 +156,7 @@
       <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem action="action_doctor_nursing_assistan" id="item_doctor_nursing_assistan" name="Atencion aux. enfermeria" parent="doctor.menu_doctor_process" sequence="41"/>
+    <menuitem action="action_doctor_nursing_assistan" id="item_doctor_nursing_assistan" name="Atencion aux. enfermeria" parent="doctor.menu_doctor_process" groups="doctor.group_aux_enfermeria" sequence="41"/>
 
   </data>
 </openerp>
