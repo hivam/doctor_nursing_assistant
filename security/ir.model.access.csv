@@ -1,5 +1,17 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
+access_doctor_attentions,doctor.attentions,model_doctor_attentions,doctor.group_aux_enfermeria,1,0,0,0
+access_doctor_nursing_config,doctor.nursing.configuracion,model_doctor_nursing_configuracion,doctor.group_aux_enfermeria,1,0,0,0
+access_doctor_atc_past,doctor.atc.past,doctor.model_doctor_atc_past,doctor.group_aux_enfermeria,1,0,0,0
+access_doctor_attentions_past,doctor.attentions.past,doctor.model_doctor_attentions_past,doctor.group_aux_enfermeria,1,0,0,0
+access_doctor_attentions_exam,doctor.attentions.exam,doctor.model_doctor_attentions_exam,doctor.group_aux_enfermeria,1,0,0,0
+access_doctor_review_systems,doctor.review.systems,doctor.model_doctor_review_systems,doctor.group_aux_enfermeria,1,0,0,0
+
+
+access_doctor_attentions_medicamento_otro,doctor.attentions.medicamento_otro,l10n_co_doctor.model_doctor_attentions_medicamento_otro,doctor.group_aux_enfermeria,1,0,0,0
+
+
+
 access_doctor_patient_aux,doctor.patient_aux,model_doctor_patient,doctor.group_aux_enfermeria,1,0,0,0
 access_doctor_nursing_assistan_aux,doctor.nursing.assistan_aux,model_doctor_nursing_assistan,doctor.group_aux_enfermeria,1,1,1,0
 access_doctor_notas_auxiliar_aux,doctor.notas.auxiliar_aux,model_doctor_notas_auxiliar,doctor.group_aux_enfermeria,1,1,1,0
